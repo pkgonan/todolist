@@ -1,6 +1,7 @@
 (function (window) {
 	'use strict';
 
-	// Your starting point. Enjoy the ride!
+	var url = 'http://localhost:8080/todo';
+	doGet(url, 'All');
 
 })(window);
