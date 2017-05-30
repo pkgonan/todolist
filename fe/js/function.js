@@ -85,16 +85,15 @@ function doDone(myUrl, data){
 		url : myUrl,
 		data : data,
 		success : function(res){
-			if(res == 1){
-				if(chkbox.is(':checked')){
-					chkbox.attr('checked', true);
-					grandparent.attr('class', 'completed');
-				}
-				else{
-					chkbox.attr('checked', false);
-					grandparent.attr('class', '');
-				}
+			if(chkbox.is(':checked')){
+				chkbox.attr('checked', true);
+				grandparent.attr('class', 'completed');
 			}
+			else{
+				chkbox.attr('checked', false);
+				grandparent.attr('class', '');
+			}
+			
 		}	
 	});
 }
@@ -105,15 +104,13 @@ function doDelete(myUrl, data){
 		type : 'DELETE',
 		url : myUrl,
 		success : function(res){
-			if(res >= 1){
-				if(data != '') data.parent().remove();
-				var cnt = Number($('.todo-count').children('strong').text())-1;
-				$('.todo-count').children('strong').text(cnt);
+			if(data != '') data.parent().remove();
+			var cnt = Number($('.todo-count').children('strong').text())-1;
+			$('.todo-count').children('strong').text(cnt);
 
-				if($('#All').hasClass('selected')) doGet(url, 'All');
-				else if($('#Active').hasClass('selected')) doGet(url, 'Active');
-				else doGet(url, 'Completed');
-			}
+			if($('#All').hasClass('selected')) doGet(url, 'All');
+			else if($('#Active').hasClass('selected')) doGet(url, 'Active');
+			else doGet(url, 'Completed');
 		}
 	});
 }

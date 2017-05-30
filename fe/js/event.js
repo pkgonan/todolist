@@ -1,4 +1,4 @@
-var url = 'http://localhost:8080/todo';
+var url = 'http://localhost:8080/api/todos';
 
 
 $('.new-todo').on('change', function() {

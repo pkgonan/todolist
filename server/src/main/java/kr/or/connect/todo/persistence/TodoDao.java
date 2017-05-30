@@ -32,7 +32,7 @@ public class TodoDao {
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
 
-	public List<Todo> select(){
+	public List<Todo> selectAll(){
 		return jdbc.query(TodoSqls.SELECT_ALL, rowMapper);
 	}
 
@@ -54,7 +54,7 @@ public class TodoDao {
 		return jdbc.update(TodoSqls.DELETE_BY_ID, params);
 	}
 
-	public int delete(){
+	public int deleteCompleted(){
 		Map<String, ?> params = Collections.singletonMap("completed", 1);
 		return jdbc.update(TodoSqls.DELETE_COMPLETE, params);
 	}

@@ -20,8 +20,8 @@ public class TodoService {
         return todo;
     }
 
-    public List<Todo> select(){
-        return dao.select();
+    public List<Todo> findAll(){
+        return dao.selectAll();
     }
 
     public int update(Integer id){
@@ -33,6 +33,6 @@ public class TodoService {
     }
 
     public int delete(){
-        return dao.delete();
+        return dao.deleteCompleted();
     }
 }
