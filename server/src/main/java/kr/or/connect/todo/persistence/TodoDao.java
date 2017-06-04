@@ -37,19 +37,19 @@ public class TodoDao {
 	}
 
 	public int update(Integer id){
-		Todo findId = selectOne(id);
+		Todo findId = selectById(id);
 		findId.reverseCompleted();
 		SqlParameterSource params = new BeanPropertySqlParameterSource(findId);
 		return jdbc.update(TodoSqls.UPDATE_BY_ID, params);
 	}
 
-	public Todo selectOne(Integer id){
+	public Todo selectById(Integer id){
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		return jdbc.queryForObject(TodoSqls.SELECT_ONE, params, rowMapper);
 	}
 
-	public int delete(Integer id){
-		Todo findId = selectOne(id);
+	public int deleteById(Integer id){
+		Todo findId = selectById(id);
 		SqlParameterSource params = new BeanPropertySqlParameterSource(findId);
 		return jdbc.update(TodoSqls.DELETE_BY_ID, params);
 	}

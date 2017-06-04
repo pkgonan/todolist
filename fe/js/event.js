@@ -3,8 +3,7 @@ var url = 'http://localhost:8080/api/todos';
 
 $('.new-todo').on('change', function() {
 	var val = $('.new-todo').val();
-	var data = { 'todo' : val }; 
-	if(val != "") doPost(url, data);
+	if(val != "") doPost(url, val);
 });
 
 

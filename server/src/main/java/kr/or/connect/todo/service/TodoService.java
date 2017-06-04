@@ -29,7 +29,7 @@ public class TodoService {
     }
 
     public int delete(Integer id){
-        return dao.delete(id);
+        return dao.deleteById(id);
     }
 
     public int delete(){

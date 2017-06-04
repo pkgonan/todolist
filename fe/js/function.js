@@ -1,11 +1,15 @@
 function doPost(myUrl, data){
+	var data = { 'todo' : data };
 	$.ajax({
 		type : 'POST',
 		url : myUrl,
 		data : data,
 		success : function(todo){
 			if($('#All').hasClass('selected') || $('#Active').hasClass('selected')){ 	
-				$('.todo-list').append('<li><div class="view" id="' + todo.id + '"><input class="toggle" type="checkbox"><label>' + todo.todo + '</label><button class="destroy"></button></div></li>');
+				$('.todo-list').append('<li><div class="view" id="' + todo.id + '">'
+                                                       + '<input class="toggle" type="checkbox"><label>'
+                                                       + todo.todo + '</label><button class="destroy">'
+                                                       + '</button></div></li>');
 			}
 			
 			$('.todo-count').attr('strong', todo.length);
@@ -32,10 +36,16 @@ function doGet(myUrl, filter){
 				var now = $(this).get(0);
 				var text;
 				if(now.completed == 1){
-					text = '<li class="completed"><div class="view" id="' + now.id + '"><input class="toggle" type="checkbox" checked="checked"><label>' + now.todo + '</label><button class="destroy"></button></div></li>';
+					text = '<li class="completed"><div class="view" id="' + now.id + '">'
+					       + '<input class="toggle" type="checkbox" checked="checked">'
+                                               + '<label>' + now.todo + '</label><button class="destroy">'
+                                               + '</button></div></li>';
 				}
 				else{
-					text = '<li><div class="view" id="' + now.id + '"><input class="toggle" type="checkbox"><label>' + now.todo + '</label><button class="destroy"></button></div></li>';
+					text = '<li><div class="view" id="' + now.id + '">'
+                                               + '<input class="toggle" type="checkbox"><label>'
+                                               + now.todo + '</label><button class="destroy">'
+                                               + '</button></div></li>';
 				}
 				$('.todo-list').append(text);
 			});
@@ -93,7 +103,8 @@ function doDone(myUrl, data){
 				chkbox.attr('checked', false);
 				grandparent.attr('class', '');
 			}
-			
+
+			doGetByStatus(myUrl);
 		}	
 	});
 }
@@ -108,9 +119,14 @@ function doDelete(myUrl, data){
 			var cnt = Number($('.todo-count').children('strong').text())-1;
 			$('.todo-count').children('strong').text(cnt);
 
-			if($('#All').hasClass('selected')) doGet(url, 'All');
-			else if($('#Active').hasClass('selected')) doGet(url, 'Active');
-			else doGet(url, 'Completed');
+			doGetByStatus(url);
 		}
 	});
+}
+
+
+function doGetByStatus(myUrl){
+	if($('#All').hasClass('selected')) doGet(myUrl, 'All');
+	else if($('#Active').hasClass('selected')) doGet(myUrl, 'Active');
+	else doGet(myUrl, 'Completed');
 }
